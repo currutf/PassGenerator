@@ -1,0 +1,41 @@
+import random
+import string
+
+def generar_contraseña():
+    print("Generador de Contraseña Alfanumérica Aleatoria")
+    try:
+        # Solicitar cantidad de cada tipo de carácter
+        num_minúsculas = int(input("Cantidad de letras minúsculas: "))
+        num_mayúsculas = int(input("Cantidad de letras mayúsculas: "))
+        num_números = int(input("Cantidad de números: "))
+        num_signos = int(input("Cantidad de símbolos especiales (!,\"#,$,%,&,/,(,),=,.,-,*,?,¿,¡): "))
+
+        # Conjuntos de caracteres
+        letras_minúsculas = string.ascii_lowercase
+        letras_mayúsculas = string.ascii_uppercase
+        números = string.digits
+        signos = "!\"#$%&/()=. -*¿¡"
+
+        # Generar listas de caracteres al azar de cada tipo
+        contraseña = []
+        contraseña += random.choices(letras_minúsculas, k=num_minúsculas)
+        contraseña += random.choices(letras_mayúsculas, k=num_mayúsculas)
+        contraseña += random.choices(números, k=num_números)
+        contraseña += random.choices(signos, k=num_signos)
+
+        # Asegurar que la contraseña no esté vacía
+        if not contraseña:
+            print("Error: No se generaron caracteres para la contraseña. Asegúrate de ingresar valores mayores que cero.")
+            return
+
+        # Mezclar los caracteres para que el orden sea aleatorio
+        random.shuffle(contraseña)
+        contraseña_final = ''.join(contraseña)
+
+        print("\nContraseña generada:", contraseña_final)
+        print("Longitud total de la contraseña:", len(contraseña_final))
+    except ValueError:
+        print("Por favor, ingresa un número válido para cada parámetro.")
+
+# Ejecutar la función
+generar_contraseña()
